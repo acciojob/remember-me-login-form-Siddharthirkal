@@ -1,52 +1,44 @@
-//your JS code here. If required.
 const form = document.getElementById("loginForm");
-const username = document.getElementById("username");
-const password = document.getElementById("password");
-const checkbox = document.getElementById("checkbox");
-const existingBtn = document.getElementById("existing");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    const checkbox = document.getElementById("checkbox");
+    const existingBtn = document.getElementById("existing");
 
-window.onload = function() {
-	const savedUser = localStorage.getItem("username");
-	const savedPass = localStorage.getItem("password");
-	if(savedUser && savedPass){
-		existingBtn.style.display="block";
-	}
-};
+    // On load check localStorage
+    window.onload = function () {
+        const savedUser = localStorage.getItem("username");
+        const savedPass = localStorage.getItem("password");
 
-form.addEventListener("submit",function(e){
-	e.preventDefault();
-	const user = username.value;
-	const pass = password.value;
+        if (savedUser && savedPass) {
+            existingBtn.style.display = "block";
+        } else {
+            existingBtn.style.display = "none";
+        }
+    };
 
-	alert("Logged in as" + user){
-		localStorage.setItem("username",user);
-		localStorage.setItem("password",pass);
-	}
-	else{
-		localStorage.removeItem("username");
-		localStorage.removeItem("password");
-	}
-});
+    // Submit form
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-existingBtn.addEventListener("click",function(){
-	const savedUser = localStorage.getItem("username");
-	if(savedUser){
-		alert("Logged in as " + savedUser);
-	}
-});
+        const user = username.value;
+        const pass = password.value;
 
+        alert("Logged in as " + user);
 
+        if (checkbox.checked) {
+            localStorage.setItem("username", user);
+            localStorage.setItem("password", pass);
+        } else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+        }
+    });
 
+    // Existing user login
+    existingBtn.addEventListener("click", function () {
+        const savedUser = localStorage.getItem("username");
 
-
-
-
-
-
-
-
-
-
-
-
-
+        if (savedUser) {
+            alert("Logged in as " + savedUser);
+        }
+    });
